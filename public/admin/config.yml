@@ -1,14 +1,14 @@
 # Painel de conteúdo (Decap CMS)
 #
-# base_url precisa apontar para o provedor de OAuth publicado a partir da
-# pasta oauth-provider/ (ver oauth-provider/README.md). Troque o valor
-# abaixo assim que o deploy no Vercel estiver pronto — sem isso, o botão
-# "Login" no /admin não funciona.
+# base_url aponta para o provedor de OAuth publicado a partir da pasta
+# oauth-provider/ (ver oauth-provider/README.md). O login só funciona depois
+# que as env vars forem preenchidas no projeto Vercel e o GitHub OAuth App
+# estiver criado com a callback URL correta.
 backend:
   name: github
   repo: emanuelcastro/magalhaeserocha
   branch: main
-  base_url: https://SEU-PROVEDOR-OAUTH.vercel.app
+  base_url: https://magalhaeserocha.vercel.app
   auth_endpoint: api/begin
 
 site_url: https://magalhaeserocha.com.br
