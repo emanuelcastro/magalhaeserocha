@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magalhães e Rocha Advogados — Fortaleza/CE</title>
+<meta name="description" content="Escritório de advocacia em Fortaleza/CE. Direito do Trabalho, Acidente de Trabalho, Direito Empresarial, Proteção de Dados (LGPD), Direito Digital, Civil e do Consumidor." />
+<link rel="icon" type="image/jpeg" href="/images/logo/icone-app-navy.jpg" />
+<style>
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500 600;font-display:swap;src:url('/fonts/fraunces-italic.woff2') format('woff2');}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:500 700;font-display:swap;src:url('/fonts/fraunces-normal.woff2') format('woff2');}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 800;font-display:swap;src:url('/fonts/archivo.woff2') format('woff2');}
+
+:root{
+  --marinho: #0a4d6e;
+  --marinho-deep: #062e42;
+  --marinho-mid: #0e5c81;
+  --coral: #f1544f;
+  --coral-deep: #c73f3b;
+  --papel: #f3f5f4;
+  --papel-alt: #e9edec;
+  --grafite: #22343b;
+  --grafite-soft: #4d5f66;
+  --latao: #b08d57;
+  --linha: rgba(10,77,110,0.14);
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--papel);
+  color:var(--grafite);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:32px;}
+@media (max-width:720px){.wrap{padding-inline:20px;}}
+
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;text-wrap:balance;}
+p{margin:0;}
+
+.eyebrow{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:12.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(243,245,244,0.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linha);
+}
+.site-header .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  height:76px;
+}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--grafite);}
+.brand img{width:38px;height:38px;border-radius:3px;flex:none;}
+.brand-name{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.15;color:var(--marinho);}
+.brand-name small{display:block;font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.12em;color:var(--grafite-soft);margin-top:2px;}
+
+nav.main-nav{display:flex;align-items:center;gap:34px;}
+nav.main-nav a{
+  font-size:14px;font-weight:600;text-decoration:none;color:var(--grafite);
+  position:relative;padding-block:4px;
+}
+nav.main-nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--coral);
+  transform:scaleX(0);transform-origin:left;transition:transform .25s ease;
+}
+nav.main-nav a:hover::after{transform:scaleX(1);}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--sans);font-weight:700;font-size:14px;
+  padding:12px 22px;border-radius:2px;text-decoration:none;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn-coral{background:var(--coral);color:#fff;}
+.btn-coral:hover{background:var(--coral-deep);}
+.btn-outline-light{border-color:rgba(255,255,255,0.4);color:#fff;}
+.btn-outline-light:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
+.btn-outline-dark{border-color:var(--marinho);color:var(--marinho);}
+.btn-outline-dark:hover{background:var(--marinho);color:#fff;}
+
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--marinho);margin:5px 0;}
+
+@media (max-width:860px){
+  nav.main-nav{
+    position:fixed;inset:76px 0 0 0;background:var(--papel);
+    flex-direction:column;align-items:flex-start;gap:0;
+    padding:8px 20px 24px;
+    transform:translateY(-8px);opacity:0;visibility:hidden;
+    transition:opacity .2s ease, transform .2s ease, visibility .2s;
+  }
+  nav.main-nav.open{opacity:1;transform:translateY(0);visibility:visible;}
+  nav.main-nav a{width:100%;padding:16px 0;border-bottom:1px solid var(--linha);}
+  nav.main-nav .btn{margin-top:16px;}
+  .nav-toggle{display:block;}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  background:linear-gradient(160deg, var(--marinho) 0%, var(--marinho-deep) 100%);
+  color:#fff;position:relative;overflow:hidden;
+}
+.hero .wrap{
+  display:grid;grid-template-columns:1.05fr 0.85fr;gap:0;align-items:stretch;
+  min-height:640px;
+}
+.hero-copy{padding:88px 56px 64px 0;display:flex;flex-direction:column;justify-content:center;gap:26px;position:relative;z-index:2;}
+.hero-copy .eyebrow{color:var(--latao);}
+.hero-copy h1{font-size:clamp(34px,4.6vw,54px);line-height:1.08;color:#fff;font-weight:600;}
+.hero-copy h1 em{font-style:italic;font-weight:500;color:#f3d9c4;}
+.hero-copy .lede{font-size:18px;color:rgba(255,255,255,0.82);max-width:46ch;line-height:1.6;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;}
+.hero-oab{display:flex;gap:28px;margin-top:18px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.18);}
+.hero-oab div{display:flex;flex-direction:column;gap:3px;}
+.hero-oab .n{font-family:var(--serif);font-size:15px;color:#fff;font-weight:600;}
+.hero-oab .l{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);}
+
+.hero-figure{position:relative;}
+.hero-figure img{
+  position:absolute;bottom:0;right:-8%;height:104%;width:auto;max-width:none;
+  object-fit:cover;
+}
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;min-height:0;}
+  .hero-copy{padding:52px 0 32px;}
+  .hero-figure{height:420px;order:-1;}
+  .hero-figure img{position:static;height:100%;width:100%;object-fit:cover;object-position:top center;}
+}
+
+/* ---------- section shell ---------- */
+section{padding:96px 0;}
+@media (max-width:720px){section{padding:64px 0;}}
+.section-head{max-width:640px;margin-bottom:56px;}
+.section-head .eyebrow{color:var(--coral);margin-bottom:14px;display:block;}
+.section-head h2{font-size:clamp(28px,3.4vw,38px);color:var(--marinho);}
+.section-head p{margin-top:16px;font-size:16.5px;color:var(--grafite-soft);max-width:56ch;}
+
+/* ---------- areas ---------- */
+.area-cluster + .area-cluster{margin-top:48px;}
+.cluster-title{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  font-family:var(--sans);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--marinho);margin:0 0 22px;padding-bottom:14px;border-bottom:1px solid var(--linha);
+}
+.cluster-title span{font-weight:600;text-transform:none;letter-spacing:0;color:var(--grafite-soft);font-size:13.5px;font-family:var(--serif);font-style:italic;}
+.areas-grid{display:grid;gap:24px;}
+.areas-grid-2{grid-template-columns:1fr 1fr;}
+.areas-grid-3{grid-template-columns:repeat(3,1fr);}
+@media (max-width:780px){.areas-grid-2, .areas-grid-3{grid-template-columns:1fr;}}
+.area-card{
+  background:#fff;border:1px solid var(--linha);padding:30px 28px;
+  display:flex;flex-direction:column;gap:12px;position:relative;
+}
+.area-card::before{content:"";position:absolute;top:-1px;left:28px;width:32px;height:3px;background:var(--latao);}
+.area-card h4{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--marinho);padding-top:8px;margin:0;}
+.area-card p{color:var(--grafite-soft);font-size:14.5px;line-height:1.6;margin:0;}
+
+/* ---------- socias ---------- */
+.socia{
+  display:grid;grid-template-columns:340px 1fr;gap:60px;align-items:start;
+  padding-block:56px;
+}
+.socia + .socia{border-top:1px solid var(--linha);}
+.socia:nth-of-type(2){grid-template-columns:1fr 340px;}
+.socia:nth-of-type(2) .socia-figure{order:2;}
+.socia:nth-of-type(2) .socia-copy{order:1;}
+@media (max-width:820px){
+  .socia, .socia:nth-of-type(2){grid-template-columns:1fr;gap:28px;}
+  .socia:nth-of-type(2) .socia-figure, .socia:nth-of-type(2) .socia-copy{order:initial;}
+}
+.socia-figure img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top center;}
+.socia-tag{display:inline-block;margin-top:14px;font-family:var(--sans);font-weight:700;font-size:11.5px;letter-spacing:.1em;color:var(--marinho);text-transform:uppercase;}
+.socia-copy h3{font-size:30px;color:var(--marinho);}
+.socia-copy .cargo{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--coral);margin-top:6px;display:block;}
+.socia-copy .bio{margin-top:20px;font-size:16px;color:var(--grafite);max-width:64ch;line-height:1.65;}
+.credenciais{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:9px;}
+.credenciais li{
+  font-size:14px;color:var(--grafite-soft);padding-left:18px;position:relative;
+}
+.credenciais li::before{
+  content:"";position:absolute;left:0;top:9px;width:7px;height:1px;background:var(--latao);
+}
+
+/* ---------- proof band ---------- */
+.proof{background:var(--marinho);color:#fff;}
+.proof .section-head h2{color:#fff;}
+.proof .section-head p{color:rgba(255,255,255,0.72);}
+.proof .section-head .eyebrow{color:var(--latao);}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.15);}
+@media (max-width:780px){.proof-grid{grid-template-columns:1fr;}}
+.proof-item{background:var(--marinho-deep);padding:38px 34px;}
+.proof-item .stat{font-family:var(--serif);font-size:38px;font-weight:600;font-variant-numeric:tabular-nums;color:#fff;}
+.proof-item .label{margin-top:10px;font-size:14.5px;color:rgba(255,255,255,0.75);line-height:1.5;}
+
+/* ---------- news ---------- */
+.news-shell{
+  border:1px dashed var(--linha);
+  padding:64px 48px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  background:#fff;
+}
+.news-shell .mark{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--latao);}
+.news-shell h3{font-size:24px;color:var(--marinho);max-width:32ch;}
+.news-shell p{color:var(--grafite-soft);max-width:52ch;font-size:15px;}
+.news-topics{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px;}
+.news-topics span{
+  font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--marinho);border:1px solid var(--linha);padding:7px 14px;
+}
+
+/* ---------- contato ---------- */
+.contato{background:var(--papel-alt);}
+.contato-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;}
+@media (max-width:820px){.contato-grid{grid-template-columns:1fr;}}
+.contato-copy h2{font-size:clamp(28px,3.4vw,40px);color:var(--marinho);}
+.contato-copy p{margin-top:18px;font-size:16.5px;color:var(--grafite-soft);max-width:48ch;}
+.contato-actions{margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;}
+.contato-card{background:var(--marinho);color:#fff;padding:44px 40px;}
+.contato-card .eyebrow{color:var(--latao);}
+.contato-line{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.15);}
+.contato-line:last-child{border-bottom:none;}
+.contato-line .k{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);}
+.contato-line .v{font-family:var(--serif);font-size:17px;color:#fff;}
+
+/* ---------- footer ---------- */
+footer{background:var(--marinho-deep);color:rgba(255,255,255,0.72);padding:56px 0 32px;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.14);}
+.footer-brand{display:flex;align-items:center;gap:12px;}
+.footer-brand img{width:36px;height:36px;border-radius:3px;}
+.footer-brand span{font-family:var(--serif);font-size:17px;color:#fff;font-weight:600;}
+.footer-oab{display:flex;gap:26px;font-size:13px;flex-wrap:wrap;}
+.footer-bottom{padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#topo">
+      <img src="/images/logo/icone-app-navy.jpg" alt="Emblema Magalhães e Rocha Advogados" />
+      <span class="brand-name">Magalhães e Rocha<small>ADVOGADOS &middot; OAB/CE</small></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#areas">Áreas de Atuação</a>
+      <a href="#socias">Sócias</a>
+      <a href="#noticias">Notícias</a>
+      <a href="#contato">Contato</a>
+      <a class="btn btn-outline-dark" href="https://wa.me/5585999371776" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero" style="padding:0;">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Magalhães e Rocha Advogados &mdash; Fortaleza/CE</span>
+        <h1>Quem protege o trabalhador. Quem protege o negócio <em>na era dos dados</em>.</h1>
+        <p class="lede">Duas sócias-fundadoras, duas frentes de atuação sob o mesmo compromisso técnico: uma defende quem trabalha, a outra defende quem lidera empresas diante da LGPD e do direito digital.</p>
+        <div class="hero-actions">
+          <a class="btn btn-coral" href="https://wa.me/5585999371776" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <a class="btn btn-outline-light" href="#socias">Conhecer as sócias</a>
+        </div>
+        <div class="hero-oab">
+          <div><span class="n">OAB/CE 22.838</span><span class="l">Rosinê Magalhães</span></div>
+          <div><span class="n">OAB/CE 39.149</span><span class="l">Larissa Rocha</span></div>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <img src="/images/socias/socias-dupla.jpg" alt="Dra. Rosinê Magalhães e Dra. Larissa Rocha, sócias-fundadoras do escritório" />
+      </div>
+    </div>
+  </section>
+
+  <section id="areas">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Áreas de Atuação</span>
+        <h2>Sete frentes, um mesmo rigor técnico</h2>
+        <p>Da defesa do trabalhador à conformidade com a LGPD &mdash; organizadas nas três frentes que sustentam o escritório: trabalhista, empresarial &amp; digital, e a base cível comum às duas sócias.</p>
+      </div>
+
+      <div class="area-cluster reveal">
+        <h3 class="cluster-title">Frente Trabalhista <span>&mdash; Dra. Rosinê Magalhães</span></h3>
+        <div class="areas-grid areas-grid-2">
+          <article class="area-card">
+            <h4>Direito do Trabalho</h4>
+            <p>Rescisão e verbas rescisórias, horas extras, assédio moral e sexual, reconhecimento de vínculo e estabilidade de gestantes &mdash; para empregados; defesa em reclamações trabalhistas e compliance trabalhista &mdash; para empresas.</p>
+          </article>
+          <article class="area-card">
+            <h4>Acidente de Trabalho e Doenças Ocupacionais</h4>
+            <p>Reconhecimento de acidentes e doenças como LER/DORT, emissão de CAT, estabilidade provisória de 12 meses e indenizações por danos morais, materiais e estéticos &mdash; com histórico de negociações acima de R$ 1,3 milhão.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="area-cluster reveal">
+        <h3 class="cluster-title">Empresarial &amp; Digital <span>&mdash; Dra. Larissa Rocha</span></h3>
+        <div class="areas-grid areas-grid-3">
+          <article class="area-card">
+            <h4>Direito Empresarial</h4>
+            <p>Constituição de empresas, contratos empresariais, governança corporativa, fusões e aquisições, recuperação judicial e extrajudicial e propriedade intelectual &mdash; para sociedades de todos os portes e startups.</p>
+          </article>
+          <article class="area-card">
+            <h4>Proteção de Dados &amp; LGPD</h4>
+            <p>Mapeamento de dados, políticas de privacidade, nomeação de DPO, gestão de incidentes e Relatório de Impacto &mdash; conduzidos por advogada referenciada pelo STJ em bibliografia sobre o tema.</p>
+          </article>
+          <article class="area-card">
+            <h4>Direito Digital</h4>
+            <p>Golpes e fraudes digitais, recuperação de contas, reputação online, contratos eletrônicos, herança digital e regulação de IA, blockchain e criptoativos.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="area-cluster reveal">
+        <h3 class="cluster-title">Civil &amp; Consumidor <span>&mdash; base comum do escritório</span></h3>
+        <div class="areas-grid areas-grid-2">
+          <article class="area-card">
+            <h4>Direito Civil</h4>
+            <p>Contratos, direito de família e sucessões, responsabilidade civil, questões imobiliárias e patrimoniais, e litígios contratuais.</p>
+          </article>
+          <article class="area-card">
+            <h4>Direito do Consumidor</h4>
+            <p>Cobranças indevidas, produtos defeituosos, publicidade enganosa, negativação indevida em SPC/Serasa e problemas com passagens aéreas e planos de saúde.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="socias" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Sócias-fundadoras</span>
+        <h2>Quem assina cada caso</h2>
+        <p>Duas advogadas, duas especializações complementares &mdash; a experiência consolidada do contencioso trabalhista e a vanguarda da proteção de dados.</p>
+      </div>
+
+      <article class="socia reveal">
+        <div class="socia-figure">
+          <img src="/images/socias/rosine-magalhaes.jpg" alt="Retrato da Dra. Rosinê Magalhães" />
+          <span class="socia-tag">OAB/CE 22.838</span>
+        </div>
+        <div class="socia-copy">
+          <h3>Dra. Rosinê Magalhães</h3>
+          <span class="cargo">Direito do Trabalho &middot; Acidentes e Doenças Ocupacionais</span>
+          <p class="bio">Sócia-fundadora do escritório, defende trabalhadores em casos de acidente de trabalho e doença ocupacional, com histórico de negociações acima de R$ 1,3 milhão. Atua também na prevenção e mitigação de riscos trabalhistas junto a empresas.</p>
+          <ul class="credenciais">
+            <li>Especialista em Processo do Trabalho e Processo Civil &mdash; UNIFOR</li>
+            <li>Ex-mediadora do Tribunal de Justiça do Ceará</li>
+            <li>Membro da Comissão de Direito do Trabalho da OAB/CE</li>
+            <li>Membro da Comissão de Direito Previdenciário da OAB/CE</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="socia reveal">
+        <div class="socia-figure">
+          <img src="/images/socias/larissa-rocha.jpg" alt="Retrato da Dra. Larissa Rocha" />
+          <span class="socia-tag">OAB/CE 39.149</span>
+        </div>
+        <div class="socia-copy">
+          <h3>Dra. Larissa Rocha</h3>
+          <span class="cargo">Proteção de Dados &middot; Direito Digital &middot; Empresarial</span>
+          <p class="bio">Sócia-fundadora do escritório, lidera a atuação em Proteção de Dados, Direito Digital e Empresarial. Mestre em Direito pela UFC e doutoranda em Direito Empresarial pela UERJ, foi referenciada nas bibliografias selecionadas sobre LGPD do Superior Tribunal de Justiça em 2024.</p>
+          <ul class="credenciais">
+            <li>Certificações internacionais em LGPD, GDPR, ISO 27001, ISO 27005 e DPO &mdash; ITCERTS</li>
+            <li>Extensão em Direito Digital e Proteção de Dados &mdash; PUC/SP</li>
+            <li>Membro da Comissão de LGPD da OAB/CE</li>
+            <li>Membro da Comissão de Startups e Direito Digital da OAB/CE</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Credenciais</span>
+        <h2>Rigor técnico, dos dois lados da mesa</h2>
+      </div>
+      <div class="proof-grid reveal">
+        <div class="proof-item">
+          <div class="stat">R$ 1,3 M+</div>
+          <div class="label">em negociações trabalhistas já conduzidas pelo escritório</div>
+        </div>
+        <div class="proof-item">
+          <div class="stat">STJ &middot; 2024</div>
+          <div class="label">Dra. Larissa Rocha referenciada em bibliografia oficial sobre LGPD</div>
+        </div>
+        <div class="proof-item">
+          <div class="stat">4 comissões</div>
+          <div class="label">as sócias somam quatro assentos em comissões da OAB/CE</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="noticias">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Notícias &amp; Publicações</span>
+        <h2>Conteúdo direto do escritório</h2>
+        <p>Esta área será alimentada pelas próprias sócias, sem depender de programação &mdash; cada publicação sai do painel de conteúdo direto para o site.</p>
+      </div>
+      <div class="news-shell reveal">
+        <span class="mark">Em preparação</span>
+        <h3>Os primeiros artigos estão sendo escritos</h3>
+        <p>Quando publicados, aparecerão aqui como matérias completas, com data, tema e leitura estimada &mdash; iguais em prioridade ao restante do site.</p>
+        <div class="news-topics">
+          <span>Direito do Trabalho</span>
+          <span>LGPD &amp; Proteção de Dados</span>
+          <span>Direito Civil</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contato" id="contato">
+    <div class="wrap">
+      <div class="contato-grid">
+        <div class="contato-copy reveal">
+          <span class="eyebrow" style="color:var(--coral);">Contato</span>
+          <h2>Fale direto com o escritório</h2>
+          <p>Atendimento inicial por WhatsApp &mdash; conte brevemente o seu caso e uma das sócias responde pessoalmente.</p>
+          <div class="contato-actions">
+            <a class="btn btn-coral" href="https://wa.me/5585999371776" target="_blank" rel="noopener">(85) 99937-1776 &middot; WhatsApp</a>
+          </div>
+        </div>
+        <div class="contato-card reveal">
+          <span class="eyebrow">Escritório</span>
+          <div class="contato-line"><span class="k">Telefone</span><span class="v">(85) 99937-1776</span></div>
+          <div class="contato-line"><span class="k">Base</span><span class="v">Fortaleza &middot; CE</span></div>
+          <div class="contato-line"><span class="k">OAB/CE</span><span class="v">22.838 &middot; 39.149</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="/images/logo/icone-app-navy.jpg" alt="Emblema Magalhães e Rocha Advogados" />
+        <span>Magalhães e Rocha Advogados</span>
+      </div>
+      <div class="footer-oab">
+        <span>OAB/CE 22.838 &mdash; Rosinê Magalhães</span>
+        <span>OAB/CE 39.149 &mdash; Larissa Rocha</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Magalhães e Rocha Advogados. Todos os direitos reservados.</span>
+      <span>Site em atualização contínua</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('mainNav');
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+  });
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.14});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+</body>
+</html>
