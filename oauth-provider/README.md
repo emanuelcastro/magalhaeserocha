@@ -11,7 +11,9 @@ login. Baseado em [`netlify-cms-oauth-provider-node`](https://github.com/bericp1
 2. Em "Root Directory", selecione `oauth-provider`.
 3. Em "Environment Variables", adicione:
    - `OAUTH_PROVIDER` = `github`
-   - `ORIGIN` = `magalhaeserocha.com.br`
+   - `ORIGIN` = `magalhaeserocha.com.br,localhost:8000`
+     (a segunda origem é só para testar o login em `npm run dev` antes do domínio
+     estar no ar — pode remover depois se quiser restringir só à produção)
    - `COMPLETE_URL` = `https://<seu-projeto>.vercel.app/api/complete`
      (troque `<seu-projeto>` pelo domínio que o Vercel atribuir após o primeiro deploy)
    - `ADMIN_PANEL_URL` = `https://magalhaeserocha.com.br/admin/`
