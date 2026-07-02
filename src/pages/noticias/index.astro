@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('noticias')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<Base title="Notícias — Magalhães e Rocha Advogados" description="Artigos e atualizações do escritório sobre Direito do Trabalho, Proteção de Dados (LGPD), Direito Digital, Empresarial, Civil e do Consumidor.">
+  <section class="noticias-hero">
+    <div class="wrap">
+      <span class="eyebrow">Notícias &amp; Publicações</span>
+      <h1>Conteúdo direto do escritório</h1>
+      <p>Artigos escritos pelas próprias sócias sobre os temas em que atuam.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      {posts.length === 0 ? (
+        <div class="news-shell">
+          <span class="mark">Em preparação</span>
+          <h2>Os primeiros artigos estão sendo escritos</h2>
+          <p>Volte em breve &mdash; assim que publicadas, as matérias aparecem aqui.</p>
+        </div>
+      ) : (
+        <div class="news-grid">
+          {posts.map((post) => (
+            <a class="news-card" href={`/noticias/${post.id}/`}>
+              <span class="news-date">{post.data.date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.excerpt}</p>
+              <span class="news-link">Ler matéria &rarr;</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .noticias-hero{
+    background:linear-gradient(160deg, var(--marinho) 0%, var(--marinho-deep) 100%);
+    color:#fff;padding:72px 0 56px;
+  }
+  .noticias-hero .eyebrow{color:var(--latao);}
+  .noticias-hero h1{color:#fff;font-size:clamp(30px,4vw,44px);margin-top:14px;}
+  .noticias-hero p{margin-top:14px;font-size:17px;color:rgba(255,255,255,0.8);max-width:52ch;}
+
+  .news-shell{
+    border:1px dashed var(--linha);padding:64px 48px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;gap:16px;background:#fff;
+  }
+  .news-shell .mark{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--latao);}
+  .news-shell h2{font-size:24px;color:var(--marinho);}
+  .news-shell p{color:var(--grafite-soft);font-size:15px;}
+
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:860px){.news-grid{grid-template-columns:1fr;}}
+  .news-card{
+    display:flex;flex-direction:column;gap:10px;background:#fff;border:1px solid var(--linha);
+    padding:28px 26px;text-decoration:none;color:var(--grafite);transition:border-color .2s ease;
+  }
+  .news-card:hover{border-color:var(--marinho);}
+  .news-date{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);}
+  .news-card h2{font-size:20px;color:var(--marinho);}
+  .news-card p{font-size:14.5px;color:var(--grafite-soft);line-height:1.55;}
+  .news-link{margin-top:auto;font-size:13.5px;font-weight:700;color:var(--marinho);}
+</style>

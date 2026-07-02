@@ -1,0 +1,47 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Escritório de advocacia em Fortaleza/CE. Direito do Trabalho, Direito Empresarial, Proteção de Dados (LGPD), Direito Digital, Civil e do Consumidor.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/jpeg" href="/images/logo/icone-app-navy.jpg" />
+</head>
+<body>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.14 });
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+    }
+  </script>
+</body>
+</html>

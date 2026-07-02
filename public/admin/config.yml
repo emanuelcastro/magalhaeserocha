@@ -1,0 +1,34 @@
+# Painel de conteúdo (Decap CMS)
+#
+# base_url precisa apontar para o provedor de OAuth que você vai publicar no
+# Vercel (ver instruções do Claude). Troque o valor abaixo assim que o deploy
+# estiver pronto — sem isso, o botão "Login" no /admin não funciona.
+backend:
+  name: github
+  repo: emanuelcastro/magalhaeserocha
+  branch: main
+  base_url: https://SEU-PROVEDOR-OAUTH.vercel.app
+  auth_endpoint: auth
+
+site_url: https://magalhaeserocha.com.br
+display_url: https://magalhaeserocha.com.br
+logo_url: /images/logo/icone-app-navy.jpg
+
+media_folder: "public/images/noticias"
+public_folder: "/images/noticias"
+
+collections:
+  - name: "noticias"
+    label: "Notícias"
+    label_singular: "Notícia"
+    folder: "src/content/noticias"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data de publicação", name: "date", widget: "datetime" }
+      - { label: "Resumo (aparece na lista de notícias)", name: "excerpt", widget: "text" }
+      - { label: "Imagem de capa", name: "cover", widget: "image", required: false }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }

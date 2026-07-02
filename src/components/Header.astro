@@ -1,0 +1,35 @@
+---
+---
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="/images/logo/icone-app-navy.jpg" alt="Emblema Magalhães e Rocha Advogados" width="38" height="38" />
+      <span class="brand-name">Magalhães e Rocha<small>ADVOGADOS &middot; OAB/CE</small></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="/#areas">Áreas de Atuação</a>
+      <a href="/#socias">Sócias</a>
+      <a href="/noticias/">Notícias</a>
+      <a href="/#contato">Contato</a>
+      <a class="btn btn-outline-dark" href="https://wa.me/5585999371776" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('mainNav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav?.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

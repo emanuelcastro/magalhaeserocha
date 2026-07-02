@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('noticias');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const dataFormatada = post.data.date.toLocaleDateString('pt-BR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+});
+---
+<Base title={`${post.data.title} — Magalhães e Rocha Advogados`} description={post.data.excerpt}>
+  <article class="post">
+    <div class="wrap wrap-narrow">
+      <a class="voltar" href="/noticias/">&larr; Notícias</a>
+      <span class="post-date">{dataFormatada}</span>
+      <h1>{post.data.title}</h1>
+      {post.data.cover && <img class="post-cover" src={post.data.cover} alt="" />}
+      <div class="post-body">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .wrap-narrow{max-width:760px;}
+  .post{padding:64px 0 96px;}
+  .voltar{
+    display:inline-block;font-size:13.5px;font-weight:700;color:var(--marinho);
+    text-decoration:none;margin-bottom:28px;
+  }
+  .post-date{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);}
+  .post h1{font-size:clamp(28px,4vw,42px);color:var(--marinho);margin-top:12px;}
+  .post-cover{width:100%;margin-top:32px;border:1px solid var(--linha);}
+  .post-body{
+    margin-top:36px;font-size:17px;line-height:1.75;color:var(--grafite);
+  }
+  .post-body :global(p){margin:0 0 20px;}
+  .post-body :global(h2){font-size:24px;color:var(--marinho);margin:36px 0 14px;}
+  .post-body :global(h3){font-size:20px;color:var(--marinho);margin:28px 0 12px;}
+  .post-body :global(a){color:var(--coral);}
+  .post-body :global(ul), .post-body :global(ol){padding-left:22px;margin:0 0 20px;}
+  .post-body :global(li){margin-bottom:8px;}
+</style>
