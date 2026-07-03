@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { autores } from '../lib/autores';
 
 const noticias = await getCollection('noticias');
 const artigos = await getCollection('artigos');
@@ -182,6 +183,10 @@ const conteudo = [
         <div class="news-grid reveal">
           {conteudo.map((post) => (
             <a class="news-card" href={post.href}>
+              <div class="autor">
+                <img class="autor-avatar" src={autores[post.data.autor].foto} alt="" />
+                <span class="autor-nome">{autores[post.data.autor].nome}</span>
+              </div>
               <span class="news-date">
                 <span class="news-kind">{post.kind === 'noticia' ? 'Notícia' : 'Artigo'}</span>
                 {post.data.date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}

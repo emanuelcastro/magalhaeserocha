@@ -30,6 +30,12 @@ collections:
     format: "frontmatter"
     fields:
       - { label: "Título", name: "title", widget: "string" }
+      - label: "Autora"
+        name: "autor"
+        widget: "select"
+        options:
+          - { label: "Dra. Rosinê Magalhães", value: "rosine-magalhaes" }
+          - { label: "Dra. Larissa Rocha", value: "larissa-rocha" }
       - { label: "Data de publicação", name: "date", widget: "datetime" }
       - { label: "Resumo (aparece na lista de notícias)", name: "excerpt", widget: "text" }
       - { label: "Imagem de capa", name: "cover", widget: "image", required: false }
@@ -46,6 +52,12 @@ collections:
     format: "frontmatter"
     fields:
       - { label: "Título", name: "title", widget: "string" }
+      - label: "Autora"
+        name: "autor"
+        widget: "select"
+        options:
+          - { label: "Dra. Rosinê Magalhães", value: "rosine-magalhaes" }
+          - { label: "Dra. Larissa Rocha", value: "larissa-rocha" }
       - { label: "Data de publicação", name: "date", widget: "datetime" }
       - { label: "Resumo (aparece na lista de artigos)", name: "excerpt", widget: "text" }
       - { label: "Imagem de capa", name: "cover", widget: "image", required: false }

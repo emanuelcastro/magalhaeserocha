@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
+import { autores } from '../../lib/autores';
 
 export async function getStaticPaths() {
   const posts = await getCollection('artigos');
@@ -24,6 +25,10 @@ const dataFormatada = post.data.date.toLocaleDateString('pt-BR', {
       <a class="voltar" href="/artigos/">&larr; Artigos</a>
       <span class="post-date">{dataFormatada}</span>
       <h1>{post.data.title}</h1>
+      <div class="autor post-byline">
+        <img class="autor-avatar" src={autores[post.data.autor].foto} alt="" />
+        <span class="autor-nome">{autores[post.data.autor].nome}</span>
+      </div>
       {post.data.cover && <img class="post-cover" src={post.data.cover} alt="" />}
       <div class="post-body">
         <Content />
@@ -41,6 +46,9 @@ const dataFormatada = post.data.date.toLocaleDateString('pt-BR', {
   }
   .post-date{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);}
   .post h1{font-size:clamp(28px,4vw,42px);color:var(--marinho);margin-top:12px;}
+  .post-byline{margin-top:20px;}
+  .post-byline .autor-avatar{width:38px;height:38px;}
+  .post-byline .autor-nome{font-size:14.5px;}
   .post-cover{width:100%;margin-top:32px;border:1px solid var(--linha);}
   .post-body{
     margin-top:36px;font-size:17px;line-height:1.75;color:var(--grafite);

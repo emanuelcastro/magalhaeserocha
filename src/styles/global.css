@@ -113,6 +113,11 @@ section{padding:96px 0;}
 .section-head p{margin-top:16px;font-size:16.5px;color:var(--grafite-soft);max-width:56ch;}
 .section-head p a{color:var(--marinho);text-decoration:underline;}
 
+/* ---------- autoria (notícias/artigos) ---------- */
+.autor{display:flex;align-items:center;gap:9px;}
+.autor-avatar{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:none;}
+.autor-nome{font-size:13px;font-weight:600;color:var(--grafite-soft);}
+
 /* ---------- footer ---------- */
 footer{background:var(--marinho-deep);color:rgba(255,255,255,0.72);padding:56px 0 32px;}
 .footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.14);}
