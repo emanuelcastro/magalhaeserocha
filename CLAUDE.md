@@ -5,62 +5,58 @@
 - Domínio `magalhaeserocha.com.br` estava registrado no Registro.br e hospedado
   na Hostinger (WordPress, tema "Globaly"), sob a conta `rosinemagalhaes.adv@gmail.com`.
 - A renovação da hospedagem falhou (pagamentos recusados out/nov 2025) e o
-  plano "Premium Web Hosting" expirou em 11/11/2025. Confirmado no hPanel:
-  não há mais assinatura ativa nem site listado — hospedagem e arquivos foram
-  excluídos definitivamente pela Hostinger.
-- O domínio em si foi comprado novamente pelo usuário, direto no Registro.br
-  (ainda de posse dele — só precisa apontar o DNS para a nova hospedagem).
-- Não há backup recuperável na Hostinger. Não foi confirmado ainda se há
-  capturas úteis no Wayback Machine (web.archive.org/web/*/magalhaeserocha.com.br) —
-  verificar como referência visual opcional.
+  plano "Premium Web Hosting" expirou em 11/11/2025. Hospedagem e arquivos
+  antigos foram excluídos definitivamente pela Hostinger — sem backup
+  recuperável.
+- O domínio foi recomprado pelo usuário no Registro.br (uso do DNS automático
+  do próprio Registro.br, não nameservers externos).
 
-## Decisão de stack (já validada com o usuário)
+## Stack (implementada)
 
-- **Hospedagem:** GitHub Pages (gratuito, HTTPS automático, domínio custom via
-  DNS no Registro.br).
-- **Gerador de site:** Astro (estático, rápido, bom SEO).
-- **CMS para posts/notícias:** Decap CMS (open source, gratuito) — painel em
-  `/admin` para criar/editar posts em Markdown, commitando direto no repo.
-  GitHub Actions faz o rebuild automático a cada commit.
-- **Autenticação do CMS:** exige um pequeno OAuth provider (não roda em GitHub
-  Pages). Solução: deploy de um template pronto no Vercel (free tier) + criar
-  um "OAuth App" no GitHub. Esses dois passos exigem login nas contas do
-  usuário, então ficam por conta dele (~10 min, com passo a passo do Claude).
-- **Formulário de contato:** usar serviço terceiro tipo Formspree ou EmailJS
-  (GitHub Pages não roda backend).
-- **E-mail:** independente da hospedagem do site — @magalhaeserocha.com.br
-  pode continuar via Titan Email (Hostinger), Zoho Mail grátis, ou Google
-  Workspace. Não afeta nem é afetado pela escolha acima.
+- **Repositório:** [emanuelcastro/magalhaeserocha](https://github.com/emanuelcastro/magalhaeserocha)
+  (público — necessário para GitHub Pages gratuito).
+- **Site:** Astro, deploy automático via GitHub Actions (`.github/workflows/deploy.yml`)
+  a cada push em `main`. GitHub Pages configurado com `build_type: workflow`.
+- **CMS:** Decap CMS em `/admin`, collection `noticias` (`src/content/noticias/`,
+  schema em `src/content.config.ts`). Login via backend `github`, autenticado
+  por um provedor OAuth próprio em `oauth-provider/` (baseado em
+  `netlify-cms-oauth-provider-node`), publicado no Vercel em
+  `magalhaeserocha.vercel.app`. Já testado e funcionando de ponta a ponta
+  (login → publicar → build automático).
+- **Identidade visual:** logo real (monograma "MR", navy `#0a4d6e` + coral
+  `#f1544f`), tipografia Fraunces (display) + Archivo (corpo/UI), auto-hospedadas
+  em `public/fonts/` (sem CDN externo).
+- **Conteúdo de referência:** `content/areas-atuacao.md` guarda o texto integral
+  das 7 áreas de atuação (fonte: PDF fornecido pelo usuário) — a homepage usa
+  versões resumidas; útil se algum dia criarmos páginas individuais por área.
 
-## Configuração de DNS necessária (Registro.br → GitHub Pages)
+## Pendente (aguardando o usuário)
 
-- 4 registros A no domínio raiz apontando para:
-  185.199.108.153 / .109.153 / .110.153 / .111.153
-- 1 registro CNAME em `www` apontando para `usuario.github.io`
+1. **DNS no Registro.br** — domínio estava "em transição" (recompra recente),
+   bloqueando edição da zona DNS. Registros a adicionar assim que liberar:
+   - 4x A em `@`: `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`
+   - 1x CNAME em `www` → `emanuelcastro.github.io`
+   Sem isso, `magalhaeserocha.com.br` não resolve (site só acessível via
+   `magalhaeserocha.vercel.app`-like preview ou localhost).
+2. **Google Business Profile** — ainda não existe. Usuário vai criar em
+   business.google.com (exige verificação, pode levar dias). Quando tiver o
+   link do perfil, adicionar bloco "nota média + botão para ver avaliações no
+   Google" na seção de contato (decisão já tomada: link direto, não widget
+   pago nem depoimentos manuais).
+3. **Formulário de contato** — ainda não implementado (hoje o site só tem
+   WhatsApp como CTA). Avaliar Formspree/EmailJS quando fizer sentido.
+4. **E-mail do escritório** — independente da hospedagem do site; decidir
+   entre Titan (Hostinger), Zoho Mail grátis ou Google Workspace.
+5. **Endereço físico** — hoje o site não menciona endereço (só "Fortaleza/CE"
+   e telefone). Confirmar se é atendimento remoto, presencial com endereço, ou
+   ambos.
 
-## Pendências de conteúdo (usuário ainda não enviou)
+## Conteúdo confirmado
 
-1. Nome do escritório e advogados que devem aparecer (nomes completos, OAB se
-   quiser exibir). Domínio sugere "Magalhães e Rocha Advogados"; confirmar
-   sócios/atuantes (Rosinê Magalhães confirmada como titular da conta).
-2. Áreas de atuação (Direito Trabalhista é uma; quais outras?).
-3. Contato: telefone/WhatsApp, e-mail, endereço físico ou "atendimento remoto".
-4. Logo/fotos existentes, ou começar só com tipografia/paleta de cores.
-5. Tom visual: tradicional/sóbrio vs. moderno/direto.
-
-## Requisito confirmado
-
-- O site PRECISA de uma área de notícias/publicações (posts), gerenciável sem
-  precisar mexer em código — daí a escolha do Decap CMS.
-
-## Próximos passos
-
-1. Usuário fornece os dados de conteúdo acima.
-2. Claude monta a primeira versão: estrutura Astro (Início, Áreas de Atuação,
-   Sobre, Notícias/Publicações, Contato) + configuração do Decap CMS
-   (`/admin/config.yml`) + GitHub Actions de build.
-3. Usuário cria o repositório no GitHub, configura o custom domain no Pages,
-   e ajusta o DNS no Registro.br.
-4. Usuário cria o OAuth App no GitHub e faz o deploy do template de OAuth
-   provider no Vercel (passo a passo fornecido pelo Claude).
-5. Testar publicação de posts via `/admin` e confirmar build automático.
+- Sócias: Dra. Rosinê Magalhães (OAB/CE 22.838, trabalhista/acidentes de
+  trabalho) e Dra. Larissa Rocha (OAB/CE 39.149, LGPD/digital/empresarial).
+- 7 áreas de atuação (ver `content/areas-atuacao.md`): Direito do Trabalho,
+  Acidente de Trabalho e Doenças Ocupacionais, Direito Empresarial, Proteção
+  de Dados/LGPD, Direito Digital, Direito Civil, Direito do Consumidor.
+- Contato: WhatsApp (85) 99937-1776.
+- Logo e fotos das sócias em `public/images/`.
