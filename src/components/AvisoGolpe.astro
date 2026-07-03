@@ -1,0 +1,84 @@
+---
+---
+<div class="aviso-backdrop" id="avisoGolpe" role="alertdialog" aria-labelledby="avisoGolpeTitulo" aria-hidden="true">
+  <div class="aviso-card">
+    <button class="aviso-fechar" id="avisoGolpeFechar" aria-label="Fechar aviso">&times;</button>
+    <span class="aviso-titulo" id="avisoGolpeTitulo">Atenção!</span>
+    <p>O escritório <strong>Magalhães e Rocha Advogados</strong> nunca solicita pagamento de honorários ou adiantamentos por WhatsApp, Instagram, SMS ou qualquer outro canal de mensagens.</p>
+    <p>Desconfie de mensagens pedindo dados pessoais ou transferências de valores.</p>
+    <p>Na dúvida, entre em contato apenas pelos canais oficiais listados neste site.</p>
+    <button class="btn btn-coral aviso-entendi" id="avisoGolpeEntendi">Entendi</button>
+  </div>
+</div>
+
+<style>
+  .aviso-backdrop{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(6,20,28,0.72);backdrop-filter:blur(3px);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    opacity:0;visibility:hidden;transition:opacity .25s ease;
+  }
+  .aviso-backdrop.aberto{opacity:1;visibility:visible;}
+
+  .aviso-card{
+    position:relative;max-width:480px;width:100%;
+    background:linear-gradient(160deg, var(--marinho) 0%, var(--marinho-deep) 100%);
+    border:1px solid rgba(255,255,255,0.12);
+    padding:44px 36px 36px;
+    text-align:center;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+  }
+  .aviso-fechar{
+    position:absolute;top:14px;right:14px;
+    width:30px;height:30px;border:1px solid rgba(255,255,255,0.25);
+    background:none;color:#fff;font-size:20px;line-height:1;
+    cursor:pointer;border-radius:2px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .aviso-fechar:hover{border-color:#fff;}
+
+  .aviso-titulo{
+    display:block;font-family:var(--serif);font-weight:700;font-size:26px;
+    color:var(--latao);margin-bottom:18px;
+  }
+  .aviso-card p{
+    color:rgba(255,255,255,0.88);font-size:15px;line-height:1.6;
+    margin:0 0 14px;
+  }
+  .aviso-card p strong{color:#fff;}
+
+  .aviso-entendi{margin-top:18px;width:100%;justify-content:center;}
+</style>
+
+<script>
+  const CHAVE = 'mr-aviso-golpe-fechado';
+  const backdrop = document.getElementById('avisoGolpe');
+  const fechar = document.getElementById('avisoGolpeFechar');
+  const entendi = document.getElementById('avisoGolpeEntendi');
+
+  function esconder() {
+    backdrop?.classList.remove('aberto');
+    backdrop?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    try { sessionStorage.setItem(CHAVE, '1'); } catch {}
+  }
+
+  let jaFechado = false;
+  try { jaFechado = !!sessionStorage.getItem(CHAVE); } catch {}
+
+  if (backdrop && !jaFechado) {
+    backdrop.classList.add('aberto');
+    backdrop.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  fechar?.addEventListener('click', esconder);
+  entendi?.addEventListener('click', esconder);
+  backdrop?.addEventListener('click', (e) => {
+    if (e.target === backdrop) esconder();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') esconder();
+  });
+</script>

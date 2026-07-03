@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import AvisoGolpe from '../components/AvisoGolpe.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -28,6 +29,7 @@ const {
     <slot />
   </main>
   <Footer />
+  <AvisoGolpe />
   <script>
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
