@@ -2,7 +2,13 @@
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
-const noticias = (await getCollection('noticias'))
+const noticias = await getCollection('noticias');
+const artigos = await getCollection('artigos');
+
+const conteudo = [
+  ...noticias.map((post) => ({ ...post, kind: 'noticia' as const, href: `/noticias/${post.id}/` })),
+  ...artigos.map((post) => ({ ...post, kind: 'artigo' as const, href: `/artigos/${post.id}/` })),
+]
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 ---
@@ -156,15 +162,15 @@ const noticias = (await getCollection('noticias'))
   <section id="noticias">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">Notícias &amp; Publicações</span>
+        <span class="eyebrow">Notícias &amp; Artigos</span>
         <h2>Conteúdo direto do escritório</h2>
-        <p>Esta área é alimentada pelas próprias sócias, sem depender de programação &mdash; cada publicação sai do painel de conteúdo direto para o site.</p>
+        <p>Esta área é alimentada pelas próprias sócias, sem depender de programação &mdash; atualizações rápidas em <a href="/noticias/">Notícias</a> e análises mais aprofundadas em <a href="/artigos/">Artigos</a>.</p>
       </div>
 
-      {noticias.length === 0 ? (
+      {conteudo.length === 0 ? (
         <div class="news-shell reveal">
           <span class="mark">Em preparação</span>
-          <h3>Os primeiros artigos estão sendo escritos</h3>
+          <h3>Os primeiros textos estão sendo escritos</h3>
           <p>Quando publicados, aparecerão aqui como matérias completas, com data, tema e leitura estimada &mdash; iguais em prioridade ao restante do site.</p>
           <div class="news-topics">
             <span>Direito do Trabalho</span>
@@ -174,12 +180,15 @@ const noticias = (await getCollection('noticias'))
         </div>
       ) : (
         <div class="news-grid reveal">
-          {noticias.map((post) => (
-            <a class="news-card" href={`/noticias/${post.id}/`}>
-              <span class="news-date">{post.data.date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+          {conteudo.map((post) => (
+            <a class="news-card" href={post.href}>
+              <span class="news-date">
+                <span class="news-kind">{post.kind === 'noticia' ? 'Notícia' : 'Artigo'}</span>
+                {post.data.date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+              </span>
               <h3>{post.data.title}</h3>
               <p>{post.data.excerpt}</p>
-              <span class="news-link">Ler matéria &rarr;</span>
+              <span class="news-link">Ler mais &rarr;</span>
             </a>
           ))}
         </div>
@@ -323,7 +332,9 @@ const noticias = (await getCollection('noticias'))
     padding:28px 26px;text-decoration:none;color:var(--grafite);transition:border-color .2s ease;
   }
   .news-card:hover{border-color:var(--marinho);}
-  .news-date{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);}
+  .news-date{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grafite-soft);}
+  .news-kind{color:var(--coral);}
+  .news-kind::after{content:"·";margin-left:8px;color:var(--linha);}
   .news-card h3{font-size:20px;color:var(--marinho);}
   .news-card p{font-size:14.5px;color:var(--grafite-soft);line-height:1.55;}
   .news-link{margin-top:auto;font-size:13.5px;font-weight:700;color:var(--marinho);}

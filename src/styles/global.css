@@ -111,6 +111,7 @@ section{padding:96px 0;}
 .section-head .eyebrow{color:var(--coral);margin-bottom:14px;display:block;}
 .section-head h2{font-size:clamp(28px,3.4vw,38px);color:var(--marinho);}
 .section-head p{margin-top:16px;font-size:16.5px;color:var(--grafite-soft);max-width:56ch;}
+.section-head p a{color:var(--marinho);text-decoration:underline;}
 
 /* ---------- footer ---------- */
 footer{background:var(--marinho-deep);color:rgba(255,255,255,0.72);padding:56px 0 32px;}

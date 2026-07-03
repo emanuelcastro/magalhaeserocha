@@ -15,13 +15,14 @@ site_url: https://magalhaeserocha.com.br
 display_url: https://magalhaeserocha.com.br
 logo_url: /images/logo/icone-app-navy.jpg
 
-media_folder: "public/images/noticias"
-public_folder: "/images/noticias"
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "noticias"
     label: "Notícias"
     label_singular: "Notícia"
+    description: "Atualizações rápidas do escritório (aparecem em /noticias)"
     folder: "src/content/noticias"
     create: true
     slug: "{{slug}}"
@@ -31,5 +32,21 @@ collections:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Data de publicação", name: "date", widget: "datetime" }
       - { label: "Resumo (aparece na lista de notícias)", name: "excerpt", widget: "text" }
+      - { label: "Imagem de capa", name: "cover", widget: "image", required: false }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
+
+  - name: "artigos"
+    label: "Artigos"
+    label_singular: "Artigo"
+    description: "Análises jurídicas mais aprofundadas (aparecem em /artigos)"
+    folder: "src/content/artigos"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data de publicação", name: "date", widget: "datetime" }
+      - { label: "Resumo (aparece na lista de artigos)", name: "excerpt", widget: "text" }
       - { label: "Imagem de capa", name: "cover", widget: "image", required: false }
       - { label: "Conteúdo", name: "body", widget: "markdown" }

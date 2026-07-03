@@ -2,16 +2,16 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('noticias')).sort(
+const posts = (await getCollection('artigos')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 ---
-<Base title="Notícias — Magalhães e Rocha Advogados" description="Atualizações e novidades do escritório Magalhães e Rocha Advogados.">
+<Base title="Artigos — Magalhães e Rocha Advogados" description="Análises jurídicas do escritório Magalhães e Rocha Advogados sobre Direito do Trabalho, Proteção de Dados (LGPD), Direito Digital, Empresarial, Civil e do Consumidor.">
   <section class="noticias-hero">
     <div class="wrap">
-      <span class="eyebrow">Notícias</span>
-      <h1>Novidades do escritório</h1>
-      <p>Atualizações rápidas sobre o dia a dia do escritório. Para análises jurídicas mais aprofundadas, veja os <a href="/artigos/">Artigos</a>.</p>
+      <span class="eyebrow">Artigos</span>
+      <h1>Análises jurídicas do escritório</h1>
+      <p>Textos mais aprofundados escritos pelas sócias sobre os temas em que atuam. Para novidades rápidas, veja as <a href="/noticias/">Notícias</a>.</p>
     </div>
   </section>
 
@@ -20,17 +20,17 @@ const posts = (await getCollection('noticias')).sort(
       {posts.length === 0 ? (
         <div class="news-shell">
           <span class="mark">Em preparação</span>
-          <h2>As primeiras notícias estão sendo escritas</h2>
-          <p>Volte em breve &mdash; assim que publicadas, as matérias aparecem aqui.</p>
+          <h2>Os primeiros artigos estão sendo escritos</h2>
+          <p>Volte em breve &mdash; assim que publicados, os textos aparecem aqui.</p>
         </div>
       ) : (
         <div class="news-grid">
           {posts.map((post) => (
-            <a class="news-card" href={`/noticias/${post.id}/`}>
+            <a class="news-card" href={`/artigos/${post.id}/`}>
               <span class="news-date">{post.data.date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
               <h2>{post.data.title}</h2>
               <p>{post.data.excerpt}</p>
-              <span class="news-link">Ler matéria &rarr;</span>
+              <span class="news-link">Ler artigo &rarr;</span>
             </a>
           ))}
         </div>
