@@ -12,6 +12,27 @@ const conteudo = [
 ]
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
+
+// Coordenadas convertidas de lat/long real para o viewBox do contorno do Brasil
+// (base: bbox real ~lat 5.27..-33.75, long -73.99..-34.79 → bbox svg 227.59,520.14..322.47,618.46)
+const fortaleza = { nome: 'Fortaleza · CE', x: 313.49, y: 542.75 };
+const pinsCobertura = [
+  { nome: 'Manaus · AM', x: 261.46, y: 541.23 },
+  { nome: 'Belém · PA', x: 289.29, y: 537.07 },
+  { nome: 'São Luís · MA', x: 299.45, y: 539.79 },
+  { nome: 'Natal · RN', x: 321.45, y: 548.02 },
+  { nome: 'Recife · PE', x: 322.2, y: 553.71 },
+  { nome: 'Salvador · BA', x: 313.47, y: 566.11 },
+  { nome: 'Brasília · DF', x: 290.74, y: 573.23 },
+  { nome: 'Goiânia · GO', x: 287.47, y: 575.46 },
+  { nome: 'Campo Grande · MS', x: 274.41, y: 584.94 },
+  { nome: 'Belo Horizonte · MG', x: 300.33, y: 583.61 },
+  { nome: 'São Paulo · SP', x: 293.88, y: 592.64 },
+  { nome: 'Rio de Janeiro · RJ', x: 302.19, y: 591.16 },
+  { nome: 'Curitiba · PR', x: 287.42, y: 597.5 },
+  { nome: 'Porto Alegre · RS', x: 282.75, y: 609.04 },
+  { nome: 'Boa Vista · RR', x: 259.83, y: 526.32 },
+].map((p, i) => ({ ...p, delay: `${((i * 0.35) % 2.6).toFixed(2)}s` }));
 ---
 <Base title="Magalhães e Rocha Advogados — Fortaleza/CE">
   <section class="hero" style="padding:0;">
@@ -221,24 +242,23 @@ const conteudo = [
           <path class="brasil-silhueta" d="M286.631,618.464l5.402-10.391l0.198-8.73l10.079-6.501h5.645l4.435-7.512l0.804-14.418l-1.815-3.855l10.684-9.751l0.406-10.761l-14.514-7.105l-17.53-5.48l-8.264-0.812l2.221-4.669l-0.604-7.104l-1.808-0.596l-2.671,5.308l-1.4,1.754l-3.595-1.59l-12.093,4.261l-4.028-5.073l0.648-5.299l-3.804,3.872l-4.201-2.265l-0.424,0.597l0.009,1.841l3.622,1.945l-5.437,5.73l-3.432-0.034l-3.475-3.535l-3.933,0.121l-0.484,4.2l2.256,2.739l-2.663,8.532l-3.112,0.241l-4.953,3.13l-1.21,6.146l4.296,4.599l0.787-0.89l3.017-0.812l2.576,4.34l7.374-3.164l2.861,0.165l1.971,6.976l10.52,3.337l1.815,5.564l4.478,0.537l2.135,5.314l-1.443,4.729l1.884,2.474l-0.276,3.683l5.048-0.477l4.625,5.844l-0.363,4.105l2.74,2.316l-6.57,9.95L286.631,618.464L286.631,618.464z"/>
 
           <g class="pin-lines">
-            <line x1="313.49" y1="542.75" x2="261.46" y2="541.23" />
-            <line x1="313.49" y1="542.75" x2="289.29" y2="537.07" />
-            <line x1="313.49" y1="542.75" x2="290.74" y2="573.23" />
-            <line x1="313.49" y1="542.75" x2="293.88" y2="592.64" />
-            <line x1="313.49" y1="542.75" x2="282.75" y2="609.04" />
+            {pinsCobertura.map((p) => (
+              <line x1={fortaleza.x} y1={fortaleza.y} x2={p.x} y2={p.y} />
+            ))}
           </g>
 
-          <g class="pin" style="--delay:0.1s" transform="translate(261.46,541.23)"><circle class="pin-ping" r="2.2" /><circle class="pin-dot" r="1" /></g>
-          <g class="pin" style="--delay:0.7s" transform="translate(289.29,537.07)"><circle class="pin-ping" r="2.2" /><circle class="pin-dot" r="1" /></g>
-          <g class="pin" style="--delay:1.3s" transform="translate(290.74,573.23)"><circle class="pin-ping" r="2.2" /><circle class="pin-dot" r="1" /></g>
-          <g class="pin" style="--delay:1.9s" transform="translate(293.88,592.64)"><circle class="pin-ping" r="2.2" /><circle class="pin-dot" r="1" /></g>
-          <g class="pin" style="--delay:0.4s" transform="translate(282.75,609.04)"><circle class="pin-ping" r="2.2" /><circle class="pin-dot" r="1" /></g>
+          {pinsCobertura.map((p) => (
+            <g class="pin" style={`--delay:${p.delay}`} transform={`translate(${p.x},${p.y})`}>
+              <circle class="pin-ping" r="1.8" />
+              <circle class="pin-dot" r="0.85" />
+            </g>
+          ))}
 
-          <g class="pin pin-home" style="--delay:0s" transform="translate(313.49,542.75)">
-            <circle class="pin-ping" r="2.8" />
-            <circle class="pin-dot" r="1.7" />
+          <g class="pin pin-home" style="--delay:0s" transform={`translate(${fortaleza.x},${fortaleza.y})`}>
+            <circle class="pin-ping" r="2.6" />
+            <circle class="pin-dot" r="1.6" />
           </g>
-          <text class="mapa-rotulo" x="313.49" y="533.5" text-anchor="middle">Fortaleza · CE</text>
+          <text class="mapa-rotulo" x={fortaleza.x} y="533.5" text-anchor="middle">{fortaleza.nome}</text>
         </svg>
       </div>
     </div>
